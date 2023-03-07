@@ -7,6 +7,9 @@
     <main>
       <div>
         <h1>My Projects</h1>
+        <p>
+          <a href="{% url 'create_project' %}">Creat a new project</a>
+        </p>
         {% if projects %}
           <table>
             <thead>
