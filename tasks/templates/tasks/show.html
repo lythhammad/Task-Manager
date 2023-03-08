@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Tasks</title>
+</head>
+<body>
+    <main>
+        <div>
+            <h1>My Tasks</h1>
+            {% if my_task %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start date</th>
+                            <th>Due date</th>
+                            <th>Is completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in my_task %}
+                            <tr>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.start_date }}</td>
+                                <td>{{ task.due_date }}</td>
+                                <td>{{ task.is_completed|yesno:"yes,no" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You have no tasks</p>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>
