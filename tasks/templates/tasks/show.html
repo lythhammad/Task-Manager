@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>My Tasks</title>
-</head>
-<body>
-    <main>
-        <div>
-            <h1>My Tasks</h1>
-            {% if my_task %}
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start date</th>
-                            <th>Due date</th>
-                            <th>Is completed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in my_task %}
+    <head>
+        <title>My Tasks</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'show_my_tasks' %}">My tasks</a>
+                </li>
+                <li>
+                    <a href="{% url 'list_projects' %}">My projects</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'signup' %}">Signup</a>
+                </li>
+                {% endif %}
+            </ul>
+            </nav>
+        </header>
+        <main>
+            <div>
+                <h1>My Tasks</h1>
+                {% if my_task %}
+                    <table>
+                        <thead>
                             <tr>
-                                <td>{{ task.name }}</td>
-                                <td>{{ task.start_date }}</td>
-                                <td>{{ task.due_date }}</td>
-                                <td>{{ task.is_completed|yesno:"yes,no" }}</td>
+                                <th>Name</th>
+                                <th>Start date</th>
+                                <th>Due date</th>
+                                <th>Is completed</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            {% else %}
-                <p>You have no tasks</p>
-            {% endif %}
-        </div>
-    </main>
-</body>
+                        </thead>
+                        <tbody>
+                            {% for task in my_task %}
+                                <tr>
+                                    <td>{{ task.name }}</td>
+                                    <td>{{ task.start_date }}</td>
+                                    <td>{{ task.due_date }}</td>
+                                    <td>{{ task.is_completed|yesno:"yes,no" }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>You have no tasks</p>
+                {% endif %}
+            </div>
+        </main>
+    </body>
 </html>
